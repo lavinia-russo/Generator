@@ -1,10 +1,10 @@
 //____________________________________________________________________________
 /*
- Copyright (c) 2003-2023, The GENIE Collaboration
+ Copyright (c) 2003-2025, The GENIE Collaboration
  For the full text of the license visit http://copyright.genie-mc.org
 
- Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
- University of Liverpool & STFC Rutherford Appleton Laboratory
+ Costas Andreopoulos <c.andreopoulos \at cern.ch>
+ University of Liverpool
 
  Changes required to implement the GENIE Boosted Dark Matter module
  were installed by Josh Berger (Univ. of Wisconsin)
@@ -76,6 +76,11 @@ bool ProcessInfo::IsDarkMatterElastic(void) const
   return (fScatteringType == kScDarkMatterElastic);
 }
 //____________________________________________________________________________
+bool ProcessInfo::IsSinglePion(void) const
+{
+  return (fScatteringType == kScSinglePion);
+}
+//____________________________________________________________________________
 bool ProcessInfo::IsSingleKaon(void) const
 {
   return (fScatteringType == kScSingleKaon);
@@ -126,6 +131,11 @@ bool ProcessInfo::IsInverseMuDecay(void) const
 bool ProcessInfo::IsIMDAnnihilation(void) const
 {
   return (fScatteringType == kScIMDAnnihilation);
+}
+//____________________________________________________________________________
+bool ProcessInfo::IsNorm(void) const
+{
+  return (fScatteringType == kScNorm);
 }
 //____________________________________________________________________________
 bool ProcessInfo::IsDarkMatterElectronElastic(void) const

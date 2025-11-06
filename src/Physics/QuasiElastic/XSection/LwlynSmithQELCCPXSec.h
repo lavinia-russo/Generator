@@ -9,12 +9,12 @@
 \ref      C.H.Llewellyn Smith, Physics Reports (Sect. C of Physics Letters) 3,
           No. 5  (1972) 261-379
 
-\author   Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
-          University of Liverpool & STFC Rutherford Appleton Laboratory
+\author   Costas Andreopoulos <c.andreopoulos \at cern.ch>
+          University of Liverpool
 
 \created  May 05, 2004
 
-\cpright  Copyright (c) 2003-2023, The GENIE Collaboration
+\cpright  Copyright (c) 2003-2025, The GENIE Collaboration
           For the full text of the license visit http://copyright.genie-mc.org
           
 */
@@ -61,7 +61,9 @@ private:
   const XSecIntegratorI *      fXSecIntegrator;   ///<
   double                       fCos8c2;           ///< cos^2(cabibbo angle)
 
-  double                       fXSecScale;        ///< external xsec scaling factor
+  double                       fXSecCCScale;        ///< external xsec scaling factor for CC 
+  double                       fXSecNCScale;        ///< external xsec scaling factor for NC
+  double                       fXSecEMScale;        ///< external xsec scaling factor for EM
 
   // Variables for integrating
   const NuclearModelI *        fNuclModel;

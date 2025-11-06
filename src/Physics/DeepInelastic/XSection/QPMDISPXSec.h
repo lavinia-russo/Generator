@@ -8,12 +8,12 @@
 
 \ref      E.A.Paschos and J.Y.Yu, Phys.Rev.D 65.03300
 
-\author   Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
-          University of Liverpool & STFC Rutherford Appleton Laboratory
+\author   Costas Andreopoulos <c.andreopoulos \at cern.ch>
+          University of Liverpool
 
 \created  May 05, 2004
 
-\cpright  Copyright (c) 2003-2023, The GENIE Collaboration
+\cpright  Copyright (c) 2003-2025, The GENIE Collaboration
           For the full text of the license visit http://copyright.genie-mc.org          
 */
 //____________________________________________________________________________
@@ -58,7 +58,9 @@ private:
 
   const XSecAlgorithmI * fCharmProdModel;
 
-  double fScale;            ///< cross section scaling factor
+  double fCCScale;            ///< cross section scaling factor
+  double fNCScale;            ///< cross section scaling factor
+  double fEMScale;            ///< cross section scaling factor
   double fSin48w;           ///< sin^4(Weingberg angle)
 };
 

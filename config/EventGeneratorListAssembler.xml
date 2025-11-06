@@ -99,6 +99,11 @@ Generator-%d                alg     No
      <param type="alg" name="Generator-0">   genie::EventGenerator/DIS-CC-SINGLEK </param>
   </param_set>
 
+  <param_set name="IBD">
+     <param type="int" name="NGenerators">   1                               </param>
+     <param type="alg" name="Generator-0">   genie::EventGenerator/IBD       </param>
+  </param_set>
+  
   <param_set name="IMD"> 
      <param type="int" name="NGenerators">   2                               </param>
      <param type="alg" name="Generator-0">   genie::EventGenerator/IMD       </param>
@@ -560,6 +565,17 @@ Generator-%d                alg     No
   <param_set name="PhotonCOH"> 
      <param type="int" name="NGenerators">  1                                   </param>
      <param type="alg" name="Generator-0">  genie::EventGenerator/PhotonCOH     </param>
+  </param_set>
+
+  <param_set name="NORM"> 
+     <param type="int" name="NGenerators">    1                               </param>
+  <param type="alg" name="Generator-0">    genie::EventGenerator/NORM         </param>
+  </param_set>
+  
+  <param_set name="CCQE+NORM"> 
+     <param type="int" name="NGenerators">   2                                     </param>
+     <param type="alg" name="Generator-0">   genie::EventGenerator/QEL-CC          </param>
+     <param type="alg" name="Generator-1">   genie::EventGenerator/NORM            </param>
   </param_set>
 
 </alg_conf>

@@ -11,12 +11,12 @@
 \author   Joshua Berger <jberger \at physics.wisc.edu
           University of Wisconsin-Madison
 
-          Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
-          University of Liverpool & STFC Rutherford Appleton Laboratory
+          Costas Andreopoulos <c.andreopoulos \at cern.ch>
+          University of Liverpool
 
 \created  September 4, 2017
 
-\cpright  Copyright (c) 2003-2023, The GENIE Collaboration
+\cpright  Copyright (c) 2003-2025, The GENIE Collaboration
           For the full text of the license visit http://copyright.genie-mc.org
           
 */
@@ -67,7 +67,9 @@ private:
   bool   fUsingDisResJoin;  ///< use a DMDIS/RES joining scheme?
   bool   fUseCache;         ///< cache reduction factors used in joining scheme
   double fWcut;             ///< apply DMDIS/RES joining scheme < Wcut
-  double fScale;            ///< cross section scaling factor
+  double fCCScale;          ///< cross section scaling factor for CC processes
+  double fNCScale;          ///< cross section scaling factor for NC processes
+  double fEMScale;          ///< cross section scaling factor for EM processes
   double fSin48w;           ///< sin^4(Weingberg angle)
   int    fVelMode;          ///< velcoity dependence for xsec
   double fMedMass;          ///< Mediator mass

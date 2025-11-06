@@ -1,10 +1,10 @@
 //____________________________________________________________________________
 /*
- Copyright (c) 2003-2023, The GENIE Collaboration
+ Copyright (c) 2003-2025, The GENIE Collaboration
  For the full text of the license visit http://copyright.genie-mc.org
 
- Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
- University of Liverpool & STFC Rutherford Appleton Laboratory
+ Costas Andreopoulos <c.andreopoulos \at cern.ch>
+ University of Liverpool
 */
 //____________________________________________________________________________
 
@@ -1183,11 +1183,14 @@ void GHepRecord::Print(ostream & stream) const
       case ( kPSQ2fE  ) :
         stream << " dsig(Q2;E)/dQ2 =        " << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/GeV^2 |";
         break;
-      case ( kPSQ2vfE  ) :
-        stream << " dsig(Q2,v;E)/dQ2dv =    " << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/GeV^3 |";
+      case ( kPSQ2vpfE  ) :
+        stream << " dsig(Q2,v,p;E)/dQ2dvdp =" << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/GeV^4 |";
         break;
       case ( kPSWQ2fE ) :
         stream << " d2sig(W,Q2;E)/dWdQ2 =   " << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/GeV^3 |";
+        break;
+      case ( kPSWQ2ctpphipfE ) :
+        stream << " d4sig(W,Q2,cos(theta),phi;E)/dWdQ2dOmega =   " << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/GeV^3 |";
         break;
       default :
         stream << " dsig(Ev;{K_s})/dK   =   " << setfill(' ') << setw(13) << fDiffXSec/units::cm2 << " cm^2/{K}   |";

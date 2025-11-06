@@ -1,10 +1,10 @@
 //____________________________________________________________________________
 /*
- Copyright (c) 2003-2023, The GENIE Collaboration
+ Copyright (c) 2003-2025, The GENIE Collaboration
  For the full text of the license visit http://copyright.genie-mc.org
 
- Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
- University of Liverpool & STFC Rutherford Appleton Laboratory
+ Costas Andreopoulos <c.andreopoulos \at cern.ch>
+ University of Liverpool
 
  Steve Dytman <dytman+ \at pitt.edu>
  Pittsburgh University
@@ -12,6 +12,7 @@
 //____________________________________________________________________________
 
 #include <TMath.h>
+#include <memory>
 #include "Math/Minimizer.h"
 #include "Math/Factory.h"
 
@@ -351,7 +352,8 @@ void MECGenerator::AddFinalStateLepton(GHepRecord * event) const
 
   // Boosting the incoming neutrino to the NN-cluster rest frame
   // Neutrino 4p
-  TLorentzVector * p4v = event->Probe()->GetP4(); // v 4p @ LAB
+  // TLorentzVector * p4v = event->Probe()->GetP4(); // v 4p @ LAB
+  auto p4v = std::unique_ptr<TLorentzVector>(event->Probe()->GetP4());
   p4v->Boost(-1.*beta);                           // v 4p @ NN-cluster rest frame
 
   // Look-up selected kinematics
@@ -642,6 +644,16 @@ void MECGenerator::SelectNSVLeptonKinematics (GHepRecord * event) const
   // This way if someone reuses this code, they are not tripped up by it.
   TMax = Enu - LepMass;
 
+  // Warn if fQ3Max value is suspect 
+  // (i.e. above the Valencia model's rage of validity)
+  // This is just to warn users who have swapped out a MEC model
+  // without remembering to change fQ3Max.
+  if(fQ3Max>1.21){
+    LOG("MEC", pWARN)
+        << "fQ3 max is larger than expected for Valencia MEC: "
+        << fQ3Max << ". Are you sure this is correct?";
+  }
+
   // Set Tmin for throwing rndm in the accept/reject loop
   // the hadron tensors we expect will be limited in q3
   // therefore also the outgoing lepton KE can't be too low or costheta too backward
@@ -901,6 +913,16 @@ void MECGenerator::SelectSuSALeptonKinematics(GHepRecord* event) const
   // We can accidentally set it too high, because the xsec will return zero.
   // This way if someone reuses this code, they are not tripped up by it.
   TMax = Enu - LepMass;
+
+  // Warn if fQ3Max value is suspect 
+  // (i.e. below the SuSA model's rage of validity)
+  // This is just to warn users who have swapped out a MEC model
+  // without remembering to change fQ3Max.
+  if(fQ3Max<1.99){
+    LOG("MEC", pWARN)
+        << "fQ3 max is smaller than expected for SuSAv2 MEC: "
+        << fQ3Max << ". Are you sure this is correct?";
+  }
 
   // TODO: double-check the limits below
 
@@ -1609,7 +1631,8 @@ double MECGenerator::GetXSecMaxTlctl( const Interaction & in,
 				      const Range1D_t & Tl_range,
 				      const Range1D_t & ctl_range ) const {
 
-  ROOT::Math::Minimizer * min = ROOT::Math::Factory::CreateMinimizer("Minuit2");
+  auto min = std::unique_ptr<ROOT::Math::Minimizer>{
+      ROOT::Math::Factory::CreateMinimizer("Minuit2")};
 
   double Enu = in.InitState().ProbeE(kRfHitNucRest);
   double LepMass = in.FSPrimLepton()->Mass();

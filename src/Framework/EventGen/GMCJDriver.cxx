@@ -1,10 +1,10 @@
 //____________________________________________________________________________
 /*
- Copyright (c) 2003-2023, The GENIE Collaboration
+ Copyright (c) 2003-2025, The GENIE Collaboration
  For the full text of the license visit http://copyright.genie-mc.org
 
- Costas Andreopoulos <constantinos.andreopoulos \at cern.ch>
- University of Liverpool & STFC Rutherford Appleton Laboratory
+ Costas Andreopoulos <c.andreopoulos \at cern.ch>
+ University of Liverpool
 */
 //____________________________________________________________________________
 
@@ -652,9 +652,12 @@ void GMCJDriver::BootstrapXSecSplineSummation(void)
     // bit above the maximum beam energy (but below the maximum valid energy)
     // to avoid the evaluation of the cubic spline around the viscinity of
     // knots with zero y values (although the GENIE Spline object handles it)
-    double dE  = fEmax/10.;
     double min = rE.min;
-    double max = (fEmax+dE < rE.max) ? fEmax+dE : rE.max;
+    double max = TMath::Min(rE.max, fEmax);
+    
+    // Because of edge issue (see GENIE docdb 297) these lines are commented out
+    //    double dE  = fEmax/10.;
+    //    double max = (fEmax+dE < rE.max) ? fEmax+dE : rE.max;
     
     // in the logaritmic binning is important to have a narrow binning to
     // describe better the glashow resonance peak.
@@ -778,7 +781,7 @@ void GMCJDriver::ComputeProbScales(void)
     fPmax.insert(map<int,TH1D*>::value_type(neutrino_pdgc,pmax_hst));
   } // nu
 
-  delete ebins;
+  delete[] ebins;
 
   // Compute global probability scale
   // Sum Probabilities {
